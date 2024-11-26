@@ -1,3 +1,5 @@
+import { Phone } from "lucide-react";
+
 export const registerFormControls = [
   {
     name: "userName",
@@ -62,6 +64,7 @@ export const addProductFormElements = [
       { id: "women", label: "Women" },
       { id: "kids", label: "Kids" },
       { id: "accessories", label: "Accessories" },
+      { id: "phone", label: "Phone" },
       { id: "footwear", label: "Footwear" },
     ],
   },
@@ -75,6 +78,7 @@ export const addProductFormElements = [
       { id: "puma", label: "Puma" },
       { id: "levi", label: "Levi's" },
       { id: "zara", label: "Zara" },
+      { id: "phone", label: "phone" },
       { id: "h&m", label: "H&M" },
     ],
   },
@@ -149,6 +153,7 @@ export const categoryOptionsMap = {
   women: "Women",
   kids: "Kids",
   accessories: "Accessories",
+  Phone: "phone",
   footwear: "Footwear",
 };
 
@@ -158,6 +163,7 @@ export const brandOptionsMap = {
   puma: "Puma",
   levi: "Levi",
   zara: "Zara",
+  Phone: "phone",
   "h&m": "H&M",
 };
 
@@ -167,6 +173,7 @@ export const filterOptions = {
     { id: "women", label: "Women" },
     { id: "kids", label: "Kids" },
     { id: "accessories", label: "Accessories" },
+    { id: "phone", label: "phone" },
     { id: "footwear", label: "Footwear" },
   ],
   brand: [
@@ -175,6 +182,7 @@ export const filterOptions = {
     { id: "puma", label: "Puma" },
     { id: "levi", label: "Levi's" },
     { id: "zara", label: "Zara" },
+    { id: "phone", label: "phone" },
     { id: "h&m", label: "H&M" },
   ],
 };
