@@ -106,7 +106,10 @@ function ProductDetailsDialog({ open, setOpen, productDetails }) {
 
   return (
     <Dialog open={open} onOpenChange={handleDialogClose}>
-      <DialogContent className="grid grid-cols-2 gap-8 sm:p-12 max-w-[90vw] sm:max-w-[80vw] lg:max-w-[70vw]">
+<DialogContent className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:p-12 max-w-[80vw] sm:max-w-[70vw] lg:max-w-[60vw] mx-auto max-h-[90vh] sm:max-h-[90vh] lg:max-h-[90vh] overflow-auto">
+
+
+
         <div className="relative overflow-hidden rounded-lg">
           <img
             src={productDetails?.image}
@@ -115,13 +118,16 @@ function ProductDetailsDialog({ open, setOpen, productDetails }) {
             height={600}
             className="aspect-square w-full object-cover"
           />
+           <p className="text-muted-foreground text-2xl mb-5 mt-4">
+              {productDetails?.description}
+            </p>
+        
         </div>
+        
         <div className="">
           <div>
             <h1 className="text-3xl font-extrabold">{productDetails?.title}</h1>
-            <p className="text-muted-foreground text-2xl mb-5 mt-4">
-              {productDetails?.description}
-            </p>
+           
           </div>
           <div className="flex items-center justify-between">
             <p
@@ -145,25 +151,7 @@ function ProductDetailsDialog({ open, setOpen, productDetails }) {
               ({averageReview.toFixed(2)})
             </span>
           </div>
-          <div className="mt-5 mb-5">
-            {productDetails?.totalStock === 0 ? (
-              <Button className="w-full opacity-60 cursor-not-allowed">
-                Out of Stock
-              </Button>
-            ) : (
-              <Button
-                className="w-full"
-                onClick={() =>
-                  handleAddToCart(
-                    productDetails?._id,
-                    productDetails?.totalStock
-                  )
-                }
-              >
-                Add to Cart
-              </Button>
-            )}
-          </div>
+         
           <Separator />
           <div className="max-h-[300px] overflow-auto">
             <h2 className="text-xl font-bold mb-4">Reviews</h2>
@@ -213,7 +201,27 @@ function ProductDetailsDialog({ open, setOpen, productDetails }) {
               >
                 Submit
               </Button>
-            </div>
+              
+            </div> 
+          </div>
+          <div className="mt-5 mb-5">
+            {productDetails?.totalStock === 0 ? (
+              <Button className="w-full opacity-60 cursor-not-allowed">
+                Out of Stock
+              </Button>
+            ) : (
+              <Button
+                className="w-full"
+                onClick={() =>
+                  handleAddToCart(
+                    productDetails?._id,
+                    productDetails?.totalStock
+                  )
+                }
+              >
+                Add to Cart
+              </Button>
+            )}
           </div>
         </div>
       </DialogContent>
