@@ -33,7 +33,7 @@ function ShoppingHeader() {
         {/* Logo */}
         <Link to="/shop/home" className="flex items-center gap-2">
           <HousePlug className="h-6 w-6" />
-          <span className="font-bold">Ecommerce</span>
+          <span className="font-bold">VenusEmpire</span>
         </Link>
 
         {/* Mobile Menu */}
@@ -74,9 +74,9 @@ function MenuItems({ closeMenu }) {
     const currentFilter =
       menuItem.id !== "home" &&
       menuItem.id !== "products" &&
-      menuItem.id !== "search"
+      menuItem.id !== "search" 
         ? { category: [menuItem.id] }
-        : null;
+        : null; 
 
     sessionStorage.setItem("filters", JSON.stringify(currentFilter));
 
@@ -91,7 +91,7 @@ function MenuItems({ closeMenu }) {
   }
 
   return (
-    <nav className="flex flex-col lg:flex-row lg:items-center gap-4">
+    <nav className="flex flex-col lg:flex-row lg:items-center gap-5">
       {shoppingViewHeaderMenuItems.map((menuItem) => (
         <Label
           key={menuItem.id}
@@ -125,7 +125,7 @@ function HeaderRightContent() {
   }
 
   return (
-    <div className="flex items-center gap-4">
+    <div className="flex items-center gap-9 mt-4">
       {/* Cart Button */}
       <Sheet open={openCartSheet} onOpenChange={setOpenCartSheet}>
         <Button
@@ -134,8 +134,8 @@ function HeaderRightContent() {
           className="relative"
           onClick={() => setOpenCartSheet(true)}
         >
-          <ShoppingCart className="h-6 w-6" />
-          <span className="absolute top-[-5px] right-[-5px] bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+          <ShoppingCart className="h-9 w-6" />
+          <span className="absolute top-[-9px] right-[-5px] bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
             {cartItems?.items?.length || 0}
           </span>
           <span className="sr-only">View cart</span>
