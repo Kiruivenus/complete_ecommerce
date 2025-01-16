@@ -1,21 +1,20 @@
 import { Button } from "@/components/ui/button";
 import bannerOne from "../../assets/banner-1.webp";
 import bannerTwo from "../../assets/banner-2.webp";
-import bannerThree from "../../assets/banner-3.webp";
+import shoes from "../../assets/shoes.png";
 import {
   Airplay,
   BabyIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
   CloudLightning,
-  Heater,
   Images,
   Shirt,
   ShirtIcon,
   ShoppingBasket,
   UmbrellaIcon,
   WashingMachine,
-  WatchIcon,
+  Footprints,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { useEffect, useState } from "react";
@@ -35,8 +34,8 @@ const categoriesWithIcon = [
   { id: "men", label: "Men", icon: ShirtIcon },
   { id: "women", label: "Women", icon: CloudLightning },
   { id: "kids", label: "Kids", icon: BabyIcon },
-  { id: "accessories", label: "Accessories", icon: WatchIcon },
-  { id: "footwear", label: "Footwear", icon: UmbrellaIcon },
+  { id: "accessories", label: "Shoes", icon: Footprints },
+  { id: "footwear", label: "Phones", icon:UmbrellaIcon },
 ];
 
 const brandsWithIcon = [
@@ -45,7 +44,6 @@ const brandsWithIcon = [
   { id: "puma", label: "Puma", icon: ShoppingBasket },
   { id: "levi", label: "Levi's", icon: Airplay },
   { id: "zara", label: "Zara", icon: Images },
-  { id: "h&m", label: "H&M", icon: Heater },
 ];
 function ShoppingHome() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -161,47 +159,82 @@ function ShoppingHome() {
           <ChevronRightIcon className="w-4 h-4" />
         </Button>
       </div>
-      <section className="py-12 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-8">
-            Shop by category
-          </h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {categoriesWithIcon.map((categoryItem) => (
-              <Card
-                onClick={() =>
-                  handleNavigateToListingPage(categoryItem, "category")
-                }
-                className="cursor-pointer hover:shadow-lg transition-shadow"
-              >
-                <CardContent className="flex flex-col items-center justify-center p-6">
-                  <categoryItem.icon className="w-12 h-12 mb-4 text-primary" />
-                  <span className="font-bold">{categoryItem.label}</span>
-                </CardContent>
-              </Card>
-            ))}
+      <section className="py-7 bg-gray-50">
+  <div className="container mx-auto px-3">
+    <div className="grid grid-cols-5  sm:grid-cols-5 md:grid-cols-5 lg:grid-cols-5 gap-4">
+      {categoriesWithIcon && categoriesWithIcon.length > 0 ? (
+        categoriesWithIcon.map((categoryItem) => (
+          <div
+            key={categoryItem.label}
+            className="flex flex-col items-center"
+          >
+            <Card
+              onClick={() =>
+                handleNavigateToListingPage(categoryItem, "category")
+              }
+              className="cursor-pointer hover:shadow-lg transition-shadow"
+              role="button"
+              aria-label={`Navigate to ${categoryItem.label}`}
+            >
+              <CardContent className="flex flex-col items-center justify-center p-4">
+                {categoryItem.icon ? (
+                  <categoryItem.icon className=" mb-4 text-primary" />
+                ) : (
+                  <div className=" bg-gray-200" />
+                )}
+              </CardContent>
+            </Card>
+            <span className="font-bold mt-2 text-center">
+              {categoryItem.label}
+            </span>
           </div>
-        </div>
-      </section>
+        ))
+      ) : (
+        <p className="col-span-5 text-center text-gray-500">
+          No categories available.
+        </p>
+      )}
+    </div>
+  </div>
+</section>
 
-      <section className="py-12 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-8">Shop by Brand</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {brandsWithIcon.map((brandItem) => (
-              <Card
-                onClick={() => handleNavigateToListingPage(brandItem, "brand")}
-                className="cursor-pointer hover:shadow-lg transition-shadow"
-              >
-                <CardContent className="flex flex-col items-center justify-center p-6">
-                  <brandItem.icon className="w-12 h-12 mb-4 text-primary" />
-                  <span className="font-bold">{brandItem.label}</span>
-                </CardContent>
-              </Card>
-            ))}
+<section className="py-7 bg-gray-50">
+  <div className=" mx-auto px-3">
+    <div className="grid grid-cols-5  sm:grid-cols-5 md:grid-cols-5 lg:grid-cols-5 gap-4">
+      {brandsWithIcon && brandsWithIcon.length > 0 ? (
+        brandsWithIcon.map((brandItem) => (
+          <div
+            key={brandItem.label}
+            className="flex flex-col items-center"
+          >
+            <Card
+              onClick={() => handleNavigateToListingPage(brandItem, "brand")}
+              className="cursor-pointer hover:shadow-lg transition-shadow"
+              role="button"
+              aria-label={`Navigate to ${brandItem.label}`}
+            >
+              <CardContent className="flex flex-col items-center justify-center p-4">
+                {brandItem.icon ? (
+                  <brandItem.icon className="mb-4 text-primary" />
+                ) : (
+                  <div className=" bg-gray-200 rounded-full" />
+                )}
+              </CardContent>
+            </Card>
+            <span className="font-bold mt-2 text-center">
+              {brandItem.label}
+            </span>
           </div>
-        </div>
-      </section>
+        ))
+      ) : (
+        <p className="col-span-5 text-center text-gray-500">
+          No brands available.
+        </p>
+      )}
+    </div>
+  </div>
+</section>
+
 
       <section className="py-12">
         <div className="container mx-auto px-4">
