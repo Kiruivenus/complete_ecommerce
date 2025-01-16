@@ -36,7 +36,7 @@ function AuthLogin() {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-indigo-100 via-white to-indigo-50 px-4 sm:px-6 lg:px-8">
+    <div className="w-full flex items-center justify-center min-h-screen bg-gradient-to-b from-indigo-600 via-white to-indigo-400 px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-md space-y-8 bg-white p-8 rounded-lg shadow-lg">
         {/* Logo */}
         <div className="text-center">

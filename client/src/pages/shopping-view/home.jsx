@@ -1,19 +1,19 @@
 import { Button } from "@/components/ui/button";
 import bannerOne from "../../assets/banner-1.webp";
 import bannerTwo from "../../assets/banner-2.webp";
-import shoes from "../../assets/shoes.png";
+import Shoes from "../../assets/shoes.png";
 import {
   Airplay,
-  BabyIcon,
+  Ambulance,
   ChevronLeftIcon,
   ChevronRightIcon,
-  CloudLightning,
-  Images,
-  Shirt,
+  Sofa,
+  Tv,
+  Smartphone,
   ShirtIcon,
-  ShoppingBasket,
-  UmbrellaIcon,
-  WashingMachine,
+  Refrigerator,
+  Coffee,
+  Headphones,
   Footprints,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
@@ -31,19 +31,19 @@ import ProductDetailsDialog from "@/components/shopping-view/product-details";
 import { getFeatureImages } from "@/store/common-slice";
 
 const categoriesWithIcon = [
-  { id: "Phones", label: "Phones", icon: ShirtIcon },
-  { id: "Furniture", label: "Furniture", icon: CloudLightning },
-  { id: "Health", label: "Health", icon: BabyIcon },
+  { id: "Phones", label: "Phones", icon: Smartphone },
+  { id: "Furniture", label: "Furniture", icon: Sofa },
+  { id: "Health", label: "Health", icon: Ambulance },
   { id: "Shoes", label: "Shoes", icon: Footprints },
-  { id: "Fashion", label: "Fashion", icon:UmbrellaIcon },
+  { id: "Fashion", label: "Fashion", icon: ShirtIcon },
 ];
 
 const brandsWithIcon = [
-  { id: "Kitchen", label: "Kitchen", icon: Shirt },
-  { id: "accessories", label: "accessories", icon: WashingMachine },
-  { id: "Appliances", label: "Appliances", icon: ShoppingBasket },
+  { id: "Kitchen", label: "Kitchen", icon: Coffee },
+  { id: "accessories", label: "accessories", icon: Headphones },
+  { id: "Appliances", label: "Appliances", icon: Refrigerator },
   { id: "laptops", label: "laptops", icon: Airplay },
-  { id: "TV", label: "TVs", icon: Images },
+  { id: "TV", label: "TVs", icon: Tv },
 ];
 function ShoppingHome() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -119,8 +119,8 @@ function ShoppingHome() {
   }, [dispatch]);
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <div className="relative w-full h-[200px] overflow-hidden">
+    <div className="flex flex-col p-3 min-h-screen">
+      <div className="relative w-full rounded-sm h-[150px] overflow-hidden">
         {featureImageList && featureImageList.length > 0
           ? featureImageList.map((slide, index) => (
               <img

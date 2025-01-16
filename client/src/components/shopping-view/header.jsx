@@ -5,11 +5,7 @@ import { HousePlug, Menu, ShoppingCart, UserCog, LogOut } from "lucide-react";
 import { fetchCartItems } from "@/store/shop/cart-slice";
 import { resetTokenAndCredentials } from "@/store/auth-slice";
 import { shoppingViewHeaderMenuItems } from "@/config";
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-} from "../ui/sheet";
+import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 import { Button } from "../ui/button";
 import { Avatar, AvatarFallback } from "../ui/avatar";
 import {
@@ -36,28 +32,33 @@ function ShoppingHeader() {
           <span className="font-bold">VenusEmpire</span>
         </Link>
 
-        {/* Mobile Menu */}
-        <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
-          <SheetTrigger asChild>
-            <Button variant="outline" size="icon" className="lg:hidden">
-              <Menu className="h-6 w-6" />
-              <span className="sr-only">Open menu</span>
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="left" className="w-full max-w-xs">
-            <MenuItems closeMenu={() => setIsSheetOpen(false)} />
+        <div className="flex items-center gap-4">
+          {/* Mobile Menu */}
+          <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
+            <SheetTrigger asChild>
+              <Button variant="outline" size="icon" className="lg:hidden">
+                <Menu className="h-6 w-6" />
+                <span className="sr-only">Open menu</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="left" className="w-full max-w-xs">
+              <MenuItems closeMenu={() => setIsSheetOpen(false)} />
+              <HeaderRightContent isMobile />
+            </SheetContent>
+          </Sheet>
+
+          {/* Mobile Cart and User Options */}
+          <HeaderRightContent isMobile />
+
+          {/* Desktop Menu */}
+          <div className="hidden lg:flex lg:gap-6">
+            <MenuItems />
+          </div>
+
+          {/* Desktop User and Cart Options */}
+          <div className="hidden lg:flex">
             <HeaderRightContent />
-          </SheetContent>
-        </Sheet>
-
-        {/* Desktop Menu */}
-        <div className="hidden lg:flex lg:gap-6">
-          <MenuItems />
-        </div>
-
-        {/* User and Cart Options */}
-        <div className="hidden lg:flex">
-          <HeaderRightContent />
+          </div>
         </div>
       </div>
     </header>
@@ -74,9 +75,9 @@ function MenuItems({ closeMenu }) {
     const currentFilter =
       menuItem.id !== "home" &&
       menuItem.id !== "products" &&
-      menuItem.id !== "search" 
+      menuItem.id !== "search"
         ? { category: [menuItem.id] }
-        : null; 
+        : null;
 
     sessionStorage.setItem("filters", JSON.stringify(currentFilter));
 
@@ -105,7 +106,7 @@ function MenuItems({ closeMenu }) {
   );
 }
 
-function HeaderRightContent() {
+function HeaderRightContent({ isMobile = false }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
@@ -125,7 +126,7 @@ function HeaderRightContent() {
   }
 
   return (
-    <div className="flex items-center gap-9 mt-4">
+    <div className={`flex items-center gap-4 ${isMobile ? "lg:hidden" : ""}`}>
       {/* Cart Button */}
       <Sheet open={openCartSheet} onOpenChange={setOpenCartSheet}>
         <Button
@@ -134,7 +135,7 @@ function HeaderRightContent() {
           className="relative"
           onClick={() => setOpenCartSheet(true)}
         >
-          <ShoppingCart className="h-9 w-6" />
+          <ShoppingCart className="h-6 w-6" />
           <span className="absolute top-[-9px] right-[-5px] bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
             {cartItems?.items?.length || 0}
           </span>
@@ -151,7 +152,7 @@ function HeaderRightContent() {
         <DropdownMenuTrigger asChild>
           <Avatar className="bg-black">
             <AvatarFallback className="bg-black text-white font-extrabold">
-              {user?.userName?.[0]?.toUpperCase()}
+              {user?.userName?.[0]?.toUpperCase() || "U"}
             </AvatarFallback>
           </Avatar>
         </DropdownMenuTrigger>
