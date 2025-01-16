@@ -1,4 +1,18 @@
 import { Phone } from "lucide-react";
+import {
+  Airplay,
+  Ambulance,
+  User,
+  Target,
+  Sofa,
+  Tv,
+  Smartphone,
+  ShirtIcon,
+  Refrigerator,
+  Search,
+  House,
+  Footprints,
+} from "lucide-react";
 
 export const registerFormControls = [
   {
@@ -118,51 +132,67 @@ export const shoppingViewHeaderMenuItems = [
     id: "home",
     label: "Home",
     path: "/shop/home",
+    icon: House,
   },
   {
     id: "products",
     label: "Products",
     path: "/shop/listing",
+    icon: Target,
   },
   {
     id: "Phones",
     label: "Phones",
     path: "/shop/listing",
+    icon: Smartphone,
   },
   {
     id: "Fashion",
     label: "Fashion",
     path: "/shop/listing",
+    icon: ShirtIcon,
   },
   {
     id: "Electronics",
     label: "Electronics",
     path: "/shop/listing",
+    icon: Tv,
   },
   {
     id: "Appliances",
     label: "Appliances",
     path: "/shop/listing",
+    icon: Refrigerator,
   },
   {
     id: "Shoes",
     label: "Shoes",
     path: "/shop/listing",
+    icon: Footprints,
   },
   {
     id: "Health",
     label: "Health",
     path: "/shop/listing",
+    icon: Ambulance,
   },
   {
     id: "Furniture",
     label: "Furniture",
     path: "/shop/listing",
+    icon: Sofa,
   },
   {
     id: "search",
     label: "Search",
     path: "/shop/search",
+    icon: Search,
+  },
+  {
+    id: "Account",
+    label: "Account",
+    path: "/shop/account",
+    icon: User,
   },
 ];
 

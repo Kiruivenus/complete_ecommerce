@@ -36,8 +36,7 @@ function ShoppingHeader() {
               </Button>
             </SheetTrigger>
             <SheetContent side="left" className="w-full max-w-xs">
-              <MenuItems closeMenu={() => setIsSheetOpen(false)} />
-              <HeaderRightContent isMobile />
+              <MenuItems closeMenu={() => setIsSheetOpen(false)} isMobile />
             </SheetContent>
           </Sheet>
 
@@ -49,8 +48,8 @@ function ShoppingHeader() {
         </div>
 
         <div className="flex items-center gap-4">
-          {/* Mobile Cart and User Options */}
-          <HeaderRightContent isMobile />
+          {/* Render HeaderRightContent only if toggle menu is closed */}
+          {!isSheetOpen && <HeaderRightContent isMobile />}
 
           {/* Desktop Menu */}
           <div className="hidden lg:flex lg:gap-6">
@@ -145,7 +144,7 @@ function HeaderRightContent({ isMobile = false }) {
   );
 }
 
-function MenuItems({ closeMenu }) {
+function MenuItems({ closeMenu, isMobile = false }) {
   const navigate = useNavigate();
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -176,8 +175,9 @@ function MenuItems({ closeMenu }) {
         <Label
           key={menuItem.id}
           onClick={() => handleNavigate(menuItem)}
-          className="text-sm font-medium cursor-pointer"
+          className="text-sm font-medium cursor-pointer flex items-center gap-3"
         >
+          {isMobile && menuItem.icon && <menuItem.icon className="h-5 w-5" />}
           {menuItem.label}
         </Label>
       ))}
