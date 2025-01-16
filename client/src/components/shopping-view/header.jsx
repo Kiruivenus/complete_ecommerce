@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { HousePlug, Menu, ShoppingCart, UserCog, LogOut } from "lucide-react";
+import { HousePlug, Menu, ShoppingCart, UserCog, LogOut, Search } from "lucide-react";
 import { fetchCartItems } from "@/store/shop/cart-slice";
 import { resetTokenAndCredentials } from "@/store/auth-slice";
 import { shoppingViewHeaderMenuItems } from "@/config";
@@ -21,17 +21,11 @@ import UserCartWrapper from "./cart-wrapper";
 
 function ShoppingHeader() {
   const { isAuthenticated } = useSelector((state) => state.auth);
-  const [isSheetOpen, setIsSheetOpen] = useState(false); // State to control mobile menu visibility
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b bg-background">
+    <header className="fixed top-0 left-0 right-0 z-40 w-full border-b bg-background">
       <div className="flex h-16 items-center justify-between px-4 md:px-6">
-        {/* Logo */}
-        <Link to="/shop/home" className="flex items-center gap-2">
-          <HousePlug className="h-6 w-6" />
-          <span className="font-bold">VenusEmpire</span>
-        </Link>
-
         <div className="flex items-center gap-4">
           {/* Mobile Menu */}
           <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
@@ -47,6 +41,14 @@ function ShoppingHeader() {
             </SheetContent>
           </Sheet>
 
+          {/* Logo */}
+          <Link to="/shop/home" className="flex items-center gap-2">
+            <HousePlug className="h-6 w-6" />
+            <span className="font-bold">VenusEmpire</span>
+          </Link>
+        </div>
+
+        <div className="flex items-center gap-4">
           {/* Mobile Cart and User Options */}
           <HeaderRightContent isMobile />
 
@@ -62,47 +64,6 @@ function ShoppingHeader() {
         </div>
       </div>
     </header>
-  );
-}
-
-function MenuItems({ closeMenu }) {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  function handleNavigate(menuItem) {
-    sessionStorage.removeItem("filters");
-    const currentFilter =
-      menuItem.id !== "home" &&
-      menuItem.id !== "products" &&
-      menuItem.id !== "search"
-        ? { category: [menuItem.id] }
-        : null;
-
-    sessionStorage.setItem("filters", JSON.stringify(currentFilter));
-
-    if (location.pathname.includes("listing") && currentFilter !== null) {
-      setSearchParams(new URLSearchParams(`?category=${menuItem.id}`));
-    } else {
-      navigate(menuItem.path);
-    }
-
-    // Close the toggle menu if on a mobile device
-    if (closeMenu) closeMenu();
-  }
-
-  return (
-    <nav className="flex flex-col lg:flex-row lg:items-center gap-5">
-      {shoppingViewHeaderMenuItems.map((menuItem) => (
-        <Label
-          key={menuItem.id}
-          onClick={() => handleNavigate(menuItem)}
-          className="text-sm font-medium cursor-pointer"
-        >
-          {menuItem.label}
-        </Label>
-      ))}
-    </nav>
   );
 }
 
@@ -126,7 +87,17 @@ function HeaderRightContent({ isMobile = false }) {
   }
 
   return (
-    <div className={`flex items-center gap-4 ${isMobile ? "lg:hidden" : ""}`}>
+    <div className={`flex items-center gap-3 ${isMobile ? "lg:hidden" : ""}`}>
+      {/* Search Button */}
+      <Button
+        variant="inline"
+        size="icon"
+        onClick={() => navigate("/shop/search")}
+      >
+        <Search className="h-4 w-4" />
+        <span className="sr-only">Search</span>
+      </Button>
+
       {/* Cart Button */}
       <Sheet open={openCartSheet} onOpenChange={setOpenCartSheet}>
         <Button
@@ -171,6 +142,46 @@ function HeaderRightContent({ isMobile = false }) {
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
+  );
+}
+
+function MenuItems({ closeMenu }) {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  function handleNavigate(menuItem) {
+    sessionStorage.removeItem("filters");
+    const currentFilter =
+      menuItem.id !== "home" &&
+      menuItem.id !== "products" &&
+      menuItem.id !== "search"
+        ? { category: [menuItem.id] }
+        : null;
+
+    sessionStorage.setItem("filters", JSON.stringify(currentFilter));
+
+    if (location.pathname.includes("listing") && currentFilter !== null) {
+      setSearchParams(new URLSearchParams(`?category=${menuItem.id}`));
+    } else {
+      navigate(menuItem.path);
+    }
+
+    if (closeMenu) closeMenu();
+  }
+
+  return (
+    <nav className="flex flex-col lg:flex-row lg:items-center gap-5">
+      {shoppingViewHeaderMenuItems.map((menuItem) => (
+        <Label
+          key={menuItem.id}
+          onClick={() => handleNavigate(menuItem)}
+          className="text-sm font-medium cursor-pointer"
+        >
+          {menuItem.label}
+        </Label>
+      ))}
+    </nav>
   );
 }
 

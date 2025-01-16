@@ -19,31 +19,46 @@ function UserCartWrapper({ cartItems, setOpenCartSheet }) {
         )
       : 0;
 
+  const formattedTotal = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  }).format(totalCartAmount);
+
   return (
-    <SheetContent className="sm:max-w-md">
+    <SheetContent className="sm:max-w-md flex flex-col h-full">
       <SheetHeader>
         <SheetTitle>Your Cart</SheetTitle>
       </SheetHeader>
-      <div className="mt-8 space-y-4">
-        {cartItems && cartItems.length > 0
-          ? cartItems.map((item) => <UserCartItemsContent cartItem={item} />)
-          : null}
+
+      {/* Scrollable Cart Items */}
+      <div className="mt-4 flex-1 overflow-y-auto space-y-4">
+        {cartItems && cartItems.length > 0 ? (
+          cartItems.map((item) => (
+            <UserCartItemsContent key={item.id} cartItem={item} />
+          ))
+        ) : (
+          <p className="text-center text-gray-500">Your cart is empty!</p>
+        )}
       </div>
-      <div className="mt-8 space-y-4">
-        <div className="flex justify-between">
+
+      {/* Fixed Total and Checkout Button */}
+      <div className="bg-white border-t p-4">
+        <div className="flex justify-between mb-4">
           <span className="font-bold">Total</span>
-          <span className="font-bold">${totalCartAmount}</span>
+          <span className="font-bold">{formattedTotal}</span>
         </div>
+        <Button
+          onClick={() => {
+            if (cartItems.length > 0) {
+              navigate("/shop/checkout");
+              setOpenCartSheet(false);
+            }
+          }}
+          className="w-full"
+        >
+          Checkout
+        </Button>
       </div>
-      <Button
-        onClick={() => {
-          navigate("/shop/checkout");
-          setOpenCartSheet(false);
-        }}
-        className="w-full mt-6"
-      >
-        Checkout
-      </Button>
     </SheetContent>
   );
 }
