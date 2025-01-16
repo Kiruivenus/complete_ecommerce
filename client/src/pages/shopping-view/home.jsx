@@ -31,19 +31,19 @@ import ProductDetailsDialog from "@/components/shopping-view/product-details";
 import { getFeatureImages } from "@/store/common-slice";
 
 const categoriesWithIcon = [
-  { id: "men", label: "Men", icon: ShirtIcon },
-  { id: "women", label: "Women", icon: CloudLightning },
-  { id: "kids", label: "Kids", icon: BabyIcon },
-  { id: "accessories", label: "Shoes", icon: Footprints },
-  { id: "footwear", label: "Phones", icon:UmbrellaIcon },
+  { id: "Phones", label: "Phones", icon: ShirtIcon },
+  { id: "Furniture", label: "Furniture", icon: CloudLightning },
+  { id: "Health", label: "Health", icon: BabyIcon },
+  { id: "Shoes", label: "Shoes", icon: Footprints },
+  { id: "Fashion", label: "Fashion", icon:UmbrellaIcon },
 ];
 
 const brandsWithIcon = [
-  { id: "nike", label: "Nike", icon: Shirt },
-  { id: "adidas", label: "Adidas", icon: WashingMachine },
-  { id: "puma", label: "Puma", icon: ShoppingBasket },
-  { id: "levi", label: "Levi's", icon: Airplay },
-  { id: "zara", label: "Zara", icon: Images },
+  { id: "Kitchen", label: "Kitchen", icon: Shirt },
+  { id: "accessories", label: "accessories", icon: WashingMachine },
+  { id: "Appliances", label: "Appliances", icon: ShoppingBasket },
+  { id: "laptops", label: "laptops", icon: Airplay },
+  { id: "TV", label: "TVs", icon: Images },
 ];
 function ShoppingHome() {
   const [currentSlide, setCurrentSlide] = useState(0);

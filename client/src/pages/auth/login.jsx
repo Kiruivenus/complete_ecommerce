@@ -13,12 +13,14 @@ const initialState = {
 
 function AuthLogin() {
   const [formData, setFormData] = useState(initialState);
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const { toast } = useToast();
 
   function onSubmit(event) {
     event.preventDefault();
-
+    setIsLoading(true);
+    
     dispatch(loginUser(formData)).then((data) => {
       if (data?.payload?.success) {
         toast({
@@ -30,32 +32,50 @@ function AuthLogin() {
           variant: "destructive",
         });
       }
-    });
+    }).finally(() => setIsLoading(false));
   }
 
   return (
-    <div className="mx-auto w-full max-w-md space-y-6">
-      <div className="text-center">
-        <h1 className="text-3xl font-bold tracking-tight text-foreground">
-          Sign in to your account
-        </h1>
-        <p className="mt-2">
-          Don't have an account
-          <Link
-            className="font-medium ml-2 text-primary hover:underline"
-            to="/auth/register"
-          >
-            Register
-          </Link>
-        </p>
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-indigo-100 via-white to-indigo-50 px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-md space-y-8 bg-white p-8 rounded-lg shadow-lg">
+        {/* Logo */}
+        <div className="text-center">
+          <img src="https://i.im.ge/2025/01/16/zGPIVr.1001529478.png"  className="w-20 h-20 mx-auto mb-6" />
+          <h1 className="text-3xl font-extrabold text-gray-800">
+            Sign in to your account
+          </h1>
+          <p className="mt-2 text-gray-600">
+            Don't have an account?{" "}
+            <Link
+              to="/auth/register"
+              className="text-indigo-600 hover:underline font-medium"
+            >
+              Register
+            </Link>
+          </p>
+        </div>
+
+        {/* Form */}
+        <CommonForm
+          formControls={loginFormControls}
+          buttonText={isLoading ? "Signing In..." : "Sign In"}
+          formData={formData}
+          setFormData={setFormData}
+          onSubmit={onSubmit}
+        />
+
+        {/* Footer */}
+        <div className="text-center text-sm text-gray-500 mt-4">
+          By logging in, you agree to our{" "}
+          <Link to="" className="underline text-indigo-600">
+            Terms of Service
+          </Link>{" "}
+          and{" "}
+          <Link to="" className="underline text-indigo-600">
+            Privacy Policy
+          </Link>.
+        </div>
       </div>
-      <CommonForm
-        formControls={loginFormControls}
-        buttonText={"Sign In"}
-        formData={formData}
-        setFormData={setFormData}
-        onSubmit={onSubmit}
-      />
     </div>
   );
 }

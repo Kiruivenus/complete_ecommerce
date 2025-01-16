@@ -18,10 +18,10 @@ import UnauthPage from "./pages/unauth-page";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { checkAuth } from "./store/auth-slice";
-import { Skeleton } from "@/components/ui/skeleton";
 import PaypalReturnPage from "./pages/shopping-view/paypal-return";
 import PaymentSuccessPage from "./pages/shopping-view/payment-success";
 import SearchProducts from "./pages/shopping-view/search";
+import { Loader } from "@/components/ui/loader"; 
 
 function App() {
   const { user, isAuthenticated, isLoading } = useSelector(
@@ -30,11 +30,13 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const token =JSON.parse(sessionStorage.getItem('token'));
+    const token = JSON.parse(sessionStorage.getItem("token"));
     dispatch(checkAuth(token));
   }, [dispatch]);
 
-  if (isLoading) return <Skeleton className="w-[800] bg-black h-[600px]" />;
+  if (isLoading) {
+    return <Loader />; 
+  }
 
   console.log(isLoading, user);
 
@@ -44,10 +46,7 @@ function App() {
         <Route
           path="/"
           element={
-            <CheckAuth
-              isAuthenticated={isAuthenticated}
-              user={user}
-            ></CheckAuth>
+            <CheckAuth isAuthenticated={isAuthenticated} user={user}></CheckAuth>
           }
         />
         <Route

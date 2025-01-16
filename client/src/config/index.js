@@ -66,7 +66,7 @@ export const addProductFormElements = [
       { id: "Appliances", label: "Appliances" },
       { id: "Shoes", label: "Shoes" },
       { id: "Health", label: "Health" },
-      { id: "footwear", label: "Footwear" },
+      { id: "tvs", label: "Tvs" },
       { id: "Furniture", label: "Furniture" },
     ],
   },
@@ -75,7 +75,7 @@ export const addProductFormElements = [
     name: "brand",
     componentType: "select",
     options: [
-      { id: "cooking", label: "cooking" },
+      { id: "Kitchen", label: "Kitchen" },
       { id: "Appliances", label: "Appliances" },
       { id: "accessories", label: "accessories" },
       { id: "laptops", label: "laptops" },
@@ -177,7 +177,7 @@ export const categoryOptionsMap = {
 };
 
 export const brandOptionsMap = {
-  cooking: "cooking",
+  Kitchen: "Kitchen",
   Appliances: "Appliances",
   accessories: "accessories",
   laptops: "laptops",
@@ -203,7 +203,7 @@ export const filterOptions = {
     { id: "Furniture", label: "Furniture" },
   ],
   brand: [
-    { id: "cooking", label: "cooking" },
+    { id: "Kitchen", label: "Kitchen" },
     { id: "Appliances", label: "Appliances" },
     { id: "accessories", label: "accessories" },
     { id: "laptops", label: "laptops" },
