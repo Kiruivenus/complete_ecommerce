@@ -39,11 +39,11 @@ const categoriesWithIcon = [
 ];
 
 const brandsWithIcon = [
-  { id: "Kitchen", label: "Kitchen", icon: Coffee },
-  { id: "accessories", label: "accessories", icon: Headphones },
-  { id: "Appliances", label: "Appliances", icon: Refrigerator },
-  { id: "laptops", label: "laptops", icon: Airplay },
+  { id: "Appliances", label: "Appliance", icon: Refrigerator },
   { id: "TV", label: "TVs", icon: Tv },
+  { id: "Kitchen", label: "Kitchen", icon: Coffee },
+  { id: "laptops", label: "laptop", icon: Airplay },
+  { id: "accessories", label: "accessories", icon: Headphones },
 ];
 function ShoppingHome() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -120,7 +120,7 @@ function ShoppingHome() {
 
   return (
     <div className="flex flex-col p-3 min-h-screen">
-      <div className="relative w-full rounded-sm h-[150px] overflow-hidden">
+      <div className="relative w-full rounded-sm h-[200px] overflow-hidden">
         {featureImageList && featureImageList.length > 0
           ? featureImageList.map((slide, index) => (
               <img
@@ -159,7 +159,7 @@ function ShoppingHome() {
           <ChevronRightIcon className="w-4 h-4" />
         </Button>
       </div>
-      <section className="py-7 bg-gray-50">
+      <section className="py-4 bg-gray-50">
   <div className="container mx-auto px-3">
     <div className="grid grid-cols-5  sm:grid-cols-5 md:grid-cols-5 lg:grid-cols-5 gap-4">
       {categoriesWithIcon && categoriesWithIcon.length > 0 ? (
@@ -198,14 +198,14 @@ function ShoppingHome() {
   </div>
 </section>
 
-<section className="py-7 bg-gray-50">
+<section className="py-1 bg-gray-50">
   <div className=" mx-auto px-3">
     <div className="grid grid-cols-5  sm:grid-cols-5 md:grid-cols-5 lg:grid-cols-5 gap-4">
       {brandsWithIcon && brandsWithIcon.length > 0 ? (
         brandsWithIcon.map((brandItem) => (
           <div
             key={brandItem.label}
-            className="flex flex-col items-center"
+            className="flex flex-col  items-left"
           >
             <Card
               onClick={() => handleNavigateToListingPage(brandItem, "brand")}
