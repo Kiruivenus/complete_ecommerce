@@ -51,8 +51,8 @@ function AuthRegister() {
   }
 
   return (
-    <div className="flex items-center justify-center rounded-lg  bg-gradient-to-b from-indigo-600 via-white to-indigo-400 px-2 sm:px-6 lg:px-8">
-      <div className="w-full  bg-white  p-6 m-6  rounded-lg shadow-lg">
+    <div className="">
+      <div className="w-full max-w-md space-y-3 bg-white p-8 bg-indigo-300 rounded-lg shadow-lg">
         {/* Logo */}
         <div className="text-center">
           <img src="https://i.im.ge/2025/01/16/zGPIVr.1001529478.png" className="w-16 h-16 mx-auto mb-4" />

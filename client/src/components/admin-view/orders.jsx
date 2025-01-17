@@ -39,8 +39,7 @@ function AdminOrdersView() {
   }, [orderDetails]);
 
   return (
-    <div className="p-1 mx-auto grid grid-cols-1 gap-2">
-      <div className="flex flex-col  rounded-lg border bg-background p-2 shadow-sm">
+    <div className=" grid grid-cols-1">
     <Card>
       <CardHeader>
         <CardTitle>All Orders</CardTitle>
@@ -103,7 +102,6 @@ function AdminOrdersView() {
         </Table>
       </CardContent>
     </Card>
-    </div>
     </div>
   );
 }

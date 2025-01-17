@@ -121,7 +121,11 @@ function ProductDetailsDialog({ open, setOpen, productDetails }) {
            <p className="text-muted-foreground text-sm mb-1 mt-2">
               {productDetails?.description}
             </p>
-        
+            <Separator className="bg-black"/>
+            <p className="round text-sm mb-1 mt-2">
+              {productDetails?.details}
+            </p>
+        <Separator className="bg-black"/>
         </div>
         
         <div className="">

@@ -23,6 +23,7 @@ const initialAddressFormData = {
 function Address({ setCurrentSelectedAddress, selectedId }) {
   const [formData, setFormData] = useState(initialAddressFormData);
   const [currentEditedId, setCurrentEditedId] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false); // Modal open state
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const { addressList } = useSelector((state) => state.shopAddress);
@@ -53,6 +54,7 @@ function Address({ setCurrentSelectedAddress, selectedId }) {
             dispatch(fetchAllAddresses(user?.id));
             setCurrentEditedId(null);
             setFormData(initialAddressFormData);
+            setIsModalOpen(false); // Close modal after success
             toast({
               title: "Address updated successfully",
             });
@@ -67,6 +69,7 @@ function Address({ setCurrentSelectedAddress, selectedId }) {
           if (data?.payload?.success) {
             dispatch(fetchAllAddresses(user?.id));
             setFormData(initialAddressFormData);
+            setIsModalOpen(false); // Close modal after success
             toast({
               title: "Address added successfully",
             });
@@ -97,6 +100,7 @@ function Address({ setCurrentSelectedAddress, selectedId }) {
       pincode: getCuurentAddress?.pincode,
       notes: getCuurentAddress?.notes,
     });
+    setIsModalOpen(true); // Open modal for editing
   }
 
   function isFormValid() {
@@ -109,11 +113,9 @@ function Address({ setCurrentSelectedAddress, selectedId }) {
     dispatch(fetchAllAddresses(user?.id));
   }, [dispatch]);
 
-  console.log(addressList, "addressList");
-
   return (
     <Card>
-      <div className="mb-5 p-3 grid grid-cols-1 sm:grid-cols-2  gap-2">
+      <div className="mb-5 p-3 grid grid-cols-1 sm:grid-cols-2 gap-2">
         {addressList && addressList.length > 0
           ? addressList.map((singleAddressItem) => (
               <AddressCard
@@ -126,21 +128,47 @@ function Address({ setCurrentSelectedAddress, selectedId }) {
             ))
           : null}
       </div>
-      <CardHeader>
-        <CardTitle>
-          {currentEditedId !== null ? "Edit Address" : "Add New Address"}
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-3">
-        <CommonForm
-          formControls={addressFormControls}
-          formData={formData}
-          setFormData={setFormData}
-          buttonText={currentEditedId !== null ? "Edit" : "Add"}
-          onSubmit={handleManageAddress}
-          isBtnDisabled={!isFormValid()}
-        />
-      </CardContent>
+
+      {/* Add Address Button */}
+      <button
+        onClick={() => {
+          setIsModalOpen(true);
+          setFormData(initialAddressFormData); // Reset the form when opening
+          setCurrentEditedId(null); // Ensure it's adding a new address
+        }}
+        className=" p-2 bg-orange-500 text-white rounded-md"
+      >
+        Add New Address
+      </button>
+
+      {/* Modal for Adding/Editing Address */}
+      {isModalOpen && (
+        <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white p-6 rounded-md w-96">
+            <CardHeader>
+              <CardTitle>
+                {currentEditedId !== null ? "Edit Address" : "Add New Address"}
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <CommonForm
+                formControls={addressFormControls}
+                formData={formData}
+                setFormData={setFormData}
+                buttonText={currentEditedId !== null ? "Edit" : "Add"}
+                onSubmit={handleManageAddress}
+                isBtnDisabled={!isFormValid()}
+              />
+            </CardContent>
+            <button
+              onClick={() => setIsModalOpen(false)} // Close the modal
+              className="absolute top-2 right-2 text-gray-500"
+            >
+              &times;
+            </button>
+          </div>
+        </div>
+      )}
     </Card>
   );
 }

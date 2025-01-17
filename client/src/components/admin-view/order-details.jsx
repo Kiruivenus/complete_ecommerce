@@ -103,7 +103,7 @@ function AdminOrderDetailsView({ orderDetails }) {
         <div className="grid gap-1">
           <div className="grid ">
             <div className="font-medium">Shipping Info</div>
-            <div className="  gap-0.5 text-muted-foreground">
+            <div className="grid  gap-0.5 text-muted-foreground">
               <span>{orderDetails?.addressInfo?.address}</span>
               <span>{orderDetails?.addressInfo?.city}</span>
               <span>{orderDetails?.addressInfo?.pincode}</span>

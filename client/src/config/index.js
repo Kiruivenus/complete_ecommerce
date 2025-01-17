@@ -1,5 +1,3 @@
-import { Separator } from "@radix-ui/react-dropdown-menu";
-import { Phone } from "lucide-react";
 import {
   Bot,
   Ambulance,
@@ -10,7 +8,6 @@ import {
   Smartphone,
   ShirtIcon,
   Refrigerator,
-  Search,
   House,
   Footprints,
 } from "lucide-react";
@@ -69,6 +66,12 @@ export const addProductFormElements = [
     name: "description",
     componentType: "textarea",
     placeholder: "Enter product description",
+  },
+  {
+    label: "Details",
+    name: "details",
+    componentType: "textarea",
+    placeholder: "Enter product details",
   },
   {
     label: "Category",
