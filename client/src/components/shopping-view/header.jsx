@@ -18,6 +18,7 @@ import {
 } from "../ui/dropdown-menu";
 import { Label } from "../ui/label";
 import UserCartWrapper from "./cart-wrapper";
+import { Separator } from "@radix-ui/react-dropdown-menu";
 
 function ShoppingHeader() {
   const { isAuthenticated } = useSelector((state) => state.auth);
@@ -154,6 +155,8 @@ function MenuItems({ closeMenu, isMobile = false }) {
     const currentFilter =
       menuItem.id !== "home" &&
       menuItem.id !== "products" &&
+      menuItem.id !== "Account" &&
+      menuItem.id !== "contact" &&
       menuItem.id !== "search"
         ? { category: [menuItem.id] }
         : null;

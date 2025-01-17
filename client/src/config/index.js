@@ -1,6 +1,7 @@
+import { Separator } from "@radix-ui/react-dropdown-menu";
 import { Phone } from "lucide-react";
 import {
-  Airplay,
+  Bot,
   Ambulance,
   User,
   Target,
@@ -183,16 +184,16 @@ export const shoppingViewHeaderMenuItems = [
     icon: Sofa,
   },
   {
-    id: "search",
-    label: "Search",
-    path: "/shop/search",
-    icon: Search,
-  },
-  {
     id: "Account",
     label: "Account",
     path: "/shop/account",
     icon: User,
+  },
+  {
+    id: "Account",
+    label: "Contact us",
+    path: "/shop/contact",
+    icon: Bot,
   },
 ];
 

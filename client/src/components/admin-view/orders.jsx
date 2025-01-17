@@ -39,6 +39,8 @@ function AdminOrdersView() {
   }, [orderDetails]);
 
   return (
+    <div className="p-1 mx-auto grid grid-cols-1 gap-2">
+      <div className="flex flex-col  rounded-lg border bg-background p-2 shadow-sm">
     <Card>
       <CardHeader>
         <CardTitle>All Orders</CardTitle>
@@ -64,7 +66,7 @@ function AdminOrdersView() {
                     <TableCell>{orderItem?.orderDate.split("T")[0]}</TableCell>
                     <TableCell>
                       <Badge
-                        className={`py-1 px-3 ${
+                        className={`py-1 px-1 ${
                           orderItem?.orderStatus === "confirmed"
                             ? "bg-green-500"
                             : orderItem?.orderStatus === "rejected"
@@ -101,6 +103,8 @@ function AdminOrdersView() {
         </Table>
       </CardContent>
     </Card>
+    </div>
+    </div>
   );
 }
 

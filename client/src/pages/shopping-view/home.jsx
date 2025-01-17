@@ -199,13 +199,13 @@ function ShoppingHome() {
 </section>
 
 <section className="py-1 bg-gray-50">
-  <div className=" mx-auto px-3">
+  <div className="container mx-auto px-3">
     <div className="grid grid-cols-5  sm:grid-cols-5 md:grid-cols-5 lg:grid-cols-5 gap-4">
       {brandsWithIcon && brandsWithIcon.length > 0 ? (
         brandsWithIcon.map((brandItem) => (
           <div
             key={brandItem.label}
-            className="flex flex-col  items-left"
+            className="flex flex-col  items-center"
           >
             <Card
               onClick={() => handleNavigateToListingPage(brandItem, "brand")}
