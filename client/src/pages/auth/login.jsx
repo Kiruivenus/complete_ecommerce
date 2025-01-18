@@ -37,7 +37,7 @@ function AuthLogin() {
 
   return (
     <div>
-      <div className="w-full max-w-md space-y-3 bg-white p-11 bg-indigo-400 rounded-lg shadow-lg">
+      <div className="w-full max-w-md space-y-3 p-11 bg-indigo-300 rounded-lg shadow-lg">
         {/* Logo */}
         <div className="text-center">
           <img src="https://i.im.ge/2025/01/16/zGPIVr.1001529478.png"  className="w-20 h-20 mx-auto mb-6" />
