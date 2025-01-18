@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { HousePlug, Menu, ShoppingCart, UserCog, LogOut, Search } from "lucide-react";
+import { HousePlug, Menu, ShoppingCart, UserCog, LogOut, Settings,Heart, Search } from "lucide-react";
 import { fetchCartItems } from "@/store/shop/cart-slice";
 import { resetTokenAndCredentials } from "@/store/auth-slice";
 import { shoppingViewHeaderMenuItems } from "@/config";
@@ -133,6 +133,16 @@ function HeaderRightContent({ isMobile = false }) {
           <DropdownMenuItem onClick={() => navigate("/shop/account")}>
             <UserCog className="mr-2 h-4 w-4" />
             Account
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem onClick={() => navigate("/shop/account")}>
+            <Heart className="mr-2 h-4 w-4" />
+            Orders
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem onClick={() => navigate("/shop/account")}>
+            <Settings className="mr-2 h-4 w-4" />
+            Settings
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={handleLogout}>

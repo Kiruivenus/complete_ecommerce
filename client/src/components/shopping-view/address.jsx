@@ -144,7 +144,7 @@ function Address({ setCurrentSelectedAddress, selectedId }) {
       {/* Modal for Adding/Editing Address */}
       {isModalOpen && (
         <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-50">
-          <div className="bg-white p-6 rounded-md w-96">
+          <div className="bg-white p-6 rounded-md w-80 relative">
             <CardHeader>
               <CardTitle>
                 {currentEditedId !== null ? "Edit Address" : "Add New Address"}
@@ -160,9 +160,12 @@ function Address({ setCurrentSelectedAddress, selectedId }) {
                 isBtnDisabled={!isFormValid()}
               />
             </CardContent>
+
+            {/* Close Button */}
             <button
               onClick={() => setIsModalOpen(false)} // Close the modal
-              className="absolute top-2 right-2 text-gray-500"
+              className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 focus:outline-none"
+              aria-label="Close modal"
             >
               &times;
             </button>
