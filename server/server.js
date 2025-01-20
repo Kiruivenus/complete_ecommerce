@@ -15,6 +15,7 @@ const shopAddressRouter = require("./routes/shop/address-routes");
 const shopOrderRouter = require("./routes/shop/order-routes");
 const shopSearchRouter = require("./routes/shop/search-routes");
 const shopReviewRouter = require("./routes/shop/review-routes");
+const TokenRoute = require("./routes/token");
 
 const commonFeatureRouter = require("./routes/common/feature-routes");
 
@@ -44,6 +45,9 @@ app.use(
   })
 );
 
+app.get("/", (req, res) => {
+  res.send("Mpesa programming in progress,Time to get paid");
+});
 app.use(cookieParser());
 app.use(express.json());
 app.use("/api/auth", authRouter);
@@ -58,5 +62,7 @@ app.use("/api/shop/search", shopSearchRouter);
 app.use("/api/shop/review", shopReviewRouter);
 
 app.use("/api/common/feature", commonFeatureRouter);
+
+app.use("/token", TokenRoute);
 
 app.listen(PORT, () => console.log(`Server is now running on port ${PORT}`));

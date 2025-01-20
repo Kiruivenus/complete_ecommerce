@@ -20,6 +20,7 @@ import { useEffect } from "react";
 import { checkAuth } from "./store/auth-slice";
 import PaypalReturnPage from "./pages/shopping-view/paypal-return";
 import PaymentSuccessPage from "./pages/shopping-view/payment-success";
+import MpesaCheckout from "./pages/shopping-view/mpesa";
 import SearchProducts from "./pages/shopping-view/search";
 import { Loader } from "@/components/ui/loader"; 
 
@@ -88,6 +89,7 @@ function App() {
           <Route path="paypal-return" element={<PaypalReturnPage />} />
           <Route path="payment-success" element={<PaymentSuccessPage />} />
           <Route path="search" element={<SearchProducts />} />
+          <Route path="mpesa-checkout" element={<MpesaCheckout />} />
         </Route>
         <Route path="/unauth-page" element={<UnauthPage />} />
         <Route path="*" element={<NotFound />} />
