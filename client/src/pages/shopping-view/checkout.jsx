@@ -1,5 +1,4 @@
 import Address from "@/components/shopping-view/address";
-import img from "../../assets/account.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import UserCartItemsContent from "@/components/shopping-view/cart-items-content";
 import { Button } from "@/components/ui/button";
@@ -99,33 +98,75 @@ function ShoppingCheckout() {
       return;
     }
 
-    setIsPaymentStart(true);
+    // Create the order before initiating the M-Pesa payment
+    const orderData = {
+      userId: user?.id,
+      cartId: cartItems?._id,
+      cartItems: cartItems.items.map((item) => ({
+        productId: item?.productId,
+        title: item?.title,
+        image: item?.image,
+        price: item?.salePrice > 0 ? item?.salePrice : item?.price,
+        quantity: item?.quantity,
+      })),
+      addressInfo: {
+        addressId: currentSelectedAddress?._id,
+        address: currentSelectedAddress?.address,
+        city: currentSelectedAddress?.city,
+        pincode: currentSelectedAddress?.pincode,
+        phone: currentSelectedAddress?.phone,
+        notes: currentSelectedAddress?.notes,
+      },
+      orderStatus: "pending",
+      paymentMethod: "mpesa",
+      paymentStatus: "pending",
+      totalAmount: totalCartAmount,
+      orderDate: new Date(),
+      orderUpdateDate: new Date(),
+      paymentId: "",
+      payerId: "",
+    };
 
-    Axios.post(`${import.meta.env.VITE_API_URL}/token`, {
-      amount: mpesaAmount,
-      phone,
-    })
-      .then((res) => {
-        toast({
-          title: "Payment initiated successfully!",
-          description: "Please complete the payment on your phone.",
-          variant: "default",
-        });
+    dispatch(createNewOrder(orderData)).then((data) => {
+      if (data?.payload?.success) {
+        setIsPaymentStart(true);
+
+        // Initiate the M-Pesa payment
+        Axios.post(`${import.meta.env.VITE_API_URL}/token`, {
+          amount: mpesaAmount,
+          phone,
+        })
+          .then((res) => {
+            // M-Pesa payment initiated successfully
+            toast({
+              title: "Payment initiated successfully!",
+              description: "Please complete the payment on your phone.",
+              variant: "default",
+            });
+
+            // Redirect to M-Pesa checkout page
+            window.location.href = "/shop/mpesa-checkout";
+
+            setIsPaymentStart(false);
+          })
+          .catch((error) => {
+            toast({ title: "Payment failed.", description: "Please try again.", variant: "destructive" });
+            setIsPaymentStart(false);
+          });
+      } else {
+        toast({ title: "Order creation failed.", description: "Please try again.", variant: "destructive" });
         setIsPaymentStart(false);
-      })
-      .catch((error) => {
-        toast({ title: "Payment failed.", description: "Please try again.", variant: "destructive" });
-        setIsPaymentStart(false);
-      });
+      }
+    });
   };
 
-  if (approvalURL) {
+  // Ensure redirection happens only when using PayPal
+  if (paymentMethod === "paypal" && approvalURL) {
     window.location.href = approvalURL;
   }
 
   return (
     <div className="flex flex-col py-9">
-   
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-5 p-5">
         <Address
           selectedId={currentSelectedAddress}
@@ -170,10 +211,7 @@ function ShoppingCheckout() {
                   type="tel"
                   placeholder="Enter your phone number"
                   value={phone}
-                  onChange={(e) => {
-                    setPhone(e.target.value);
-                    setPaymentMethod("mpesa");
-                  }}
+                  onChange={(e) => setPhone(e.target.value)}
                   className="bg-slate-100 text-center rounded-xl py-3 w-full"
                 />
                 <div className="mt-2">

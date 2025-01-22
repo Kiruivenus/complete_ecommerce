@@ -276,17 +276,42 @@ export const addressFormControls = [
     placeholder: "Enter your city",
   },
   {
-    label: "Pincode",
+    label: "Postal code",
     name: "pincode",
     componentType: "input",
     type: "text",
-    placeholder: "Enter your pincode",
+    placeholder: "Enter your postal code",
   },
   {
     label: "Phone",
     name: "phone",
     componentType: "input",
     type: "text",
+    placeholder: "Enter your phone number",
+  },
+  {
+    label: "Notes",
+    name: "notes",
+    componentType: "textarea",
+    placeholder: "Enter any additional notes",
+  },
+];
+
+
+export const MpesaFormControls = [
+
+  {
+    label: "code",
+    name: " code",
+    componentType: "input",
+    type: "text",
+    placeholder: "Enter your transaction code",
+  },
+  {
+    label: "phone",
+    name: "phone",
+    componentType: "input",
+    type: "number",
     placeholder: "Enter your phone number",
   },
   {

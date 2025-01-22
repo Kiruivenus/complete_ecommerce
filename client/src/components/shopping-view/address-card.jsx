@@ -41,6 +41,7 @@ import { Label } from "../ui/label";function AddressCard({
             <p className="text-sm text-gray-600">{pincode || "Postal code not available"}</p>
             <p className="text-sm text-gray-600">{city || "City not available"}</p>
             <p className="text-sm text-gray-600">{phone || "Phone not available"}</p>
+            <p className="text-sm text-gray-600">{notes || "P not available"}</p>
 
             {/* Default Address Tag */}
             {selectedId?._id === addressInfo?._id && (
