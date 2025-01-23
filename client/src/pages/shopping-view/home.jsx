@@ -119,8 +119,8 @@ function ShoppingHome() {
   }, [dispatch]);
 
   return (
-    <div className="flex flex-col p-3 min-h-screen">
-      <div className="relative w-full rounded-sm h-[200px] overflow-hidden">
+    <div className="flex flex-col py-11 min-h-screen">
+      <div className="relative w-full rounded-sm h-[170px] sm:h-[250px] lg:h-[380px]  overflow-hidden">
         {featureImageList && featureImageList.length > 0
           ? featureImageList.map((slide, index) => (
               <img
@@ -128,7 +128,7 @@ function ShoppingHome() {
                 key={index}
                 className={`${
                   index === currentSlide ? "opacity-100" : "opacity-0"
-                } absolute top-0 left-1 w-full h-full object-cover transition-opacity duration-1000`}
+                } absolute top-0 left-1 w- p-2 rounded-lg h-[160px] sm:h-[240px] lg:h-[480px] object-cover transition-opacity duration-1000`}
               />
             ))
           : null}
