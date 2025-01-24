@@ -20,19 +20,27 @@ function AuthLogin() {
   function onSubmit(event) {
     event.preventDefault();
     setIsLoading(true);
-    
-    dispatch(loginUser(formData)).then((data) => {
-      if (data?.payload?.success) {
-        toast({
-          title: data?.payload?.message,
-        });
-      } else {
-        toast({
-          title: data?.payload?.message,
-          variant: "destructive",
-        });
-      }
-    }).finally(() => setIsLoading(false));
+
+    // Normalize email to lowercase before dispatching
+    const normalizedFormData = {
+      ...formData,
+      email: formData.email.toLowerCase(),
+    };
+
+    dispatch(loginUser(normalizedFormData))
+      .then((data) => {
+        if (data?.payload?.success) {
+          toast({
+            title: data?.payload?.message,
+          });
+        } else {
+          toast({
+            title: data?.payload?.message,
+            variant: "destructive",
+          });
+        }
+      })
+      .finally(() => setIsLoading(false));
   }
 
   return (
@@ -40,7 +48,10 @@ function AuthLogin() {
       <div className="w-full max-w-md space-y-3 p-11 bg-indigo-300 rounded-lg shadow-lg">
         {/* Logo */}
         <div className="text-center">
-          <img src="https://i.im.ge/2025/01/16/zGPIVr.1001529478.png"  className="w-20 h-20 mx-auto mb-6" />
+          <img
+            src="https://i.im.ge/2025/01/16/zGPIVr.1001529478.png"
+            className="w-20 h-20 mx-auto mb-6"
+          />
           <h1 className="text-3xl font-extrabold text-gray-800">
             Sign in to your account
           </h1>

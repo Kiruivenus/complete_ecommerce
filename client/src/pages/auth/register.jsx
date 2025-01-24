@@ -34,8 +34,16 @@ function AuthRegister() {
   function onSubmit(event) {
     event.preventDefault();
     if (!validateInputs()) return;
+
     setIsLoading(true);
-    dispatch(registerUser(formData))
+
+    // Normalize email to lowercase before dispatching
+    const normalizedFormData = {
+      ...formData,
+      email: formData.email.toLowerCase(),
+    };
+
+    dispatch(registerUser(normalizedFormData))
       .then((data) => {
         if (data?.payload?.success) {
           toast({ title: data?.payload?.message });
@@ -55,7 +63,10 @@ function AuthRegister() {
       <div className="w-full max-w-md space-y-3  p-11 bg-indigo-300 rounded-lg shadow-lg">
         {/* Logo */}
         <div className="text-center">
-          <img src="https://i.im.ge/2025/01/16/zGPIVr.1001529478.png" className="w-16 h-16 mx-auto mb-4" />
+          <img
+            src="https://i.im.ge/2025/01/16/zGPIVr.1001529478.png"
+            className="w-16 h-16 mx-auto mb-4"
+          />
           <h1 className="text-2xl font-extrabold text-gray-800">
             Create a New Account
           </h1>
